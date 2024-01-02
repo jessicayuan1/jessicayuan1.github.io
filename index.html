@@ -8,3 +8,131 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jessica Yuan</title>
 </head>
+
+
+<body>
+    <div class="centered">
+        <p>Hey, I'm</p>
+        <div class="name" id="name">
+
+            <pre id="ascii0">     ____.                    .__                ._.</pre>
+            <pre id="ascii1">    |    | ____   ______ _____|__| ____ _____    | |</pre>
+            <pre id="ascii2">    |    |/ __ \ /  ___//  ___/  |/ ___\\__  \   | |</pre>
+            <pre id="ascii3">/\__|    \  ___/ \___ \ \___ \|  \  \___ / __ \_  \|</pre>
+            <pre id="ascii4">\________|\___  >____  >____  >__|\___  >____  /  __</pre>
+            <pre id="ascii5">              \/     \/     \/        \/     \/   \/</pre>
+           
+            <div id="messenger">&nbsp</div>
+            <div id="senda1">&nbsp</div>
+            <div id="senda2">&nbsp</div>
+            <div id="senda3">&nbsp</div>
+            <div id="senda4">&nbsp</div>
+            <div id="senda5">&nbsp</div>
+        </div>      
+    
+        <script src="http://code.jquery.com/jquery.min.js"></script>
+        <script>
+            var Messenger = function(el, index){
+                'use strict';
+                var m = this;
+    
+                m.init = function(){
+                m.codeletters = "&#*+%?£@§$";
+                m.current_length = 0;
+                m.fadeBuffer = false;
+                m.messages = []
+                for (var i = 0; i <= 5; i++) {
+                    m.messages.push(document.getElementById('ascii'+i).innerHTML);
+                }
+                
+                setTimeout(m.animateIn, 100);
+                };
+    
+                m.generateRandomString = function(length) {
+                    var random_text = '';
+                    while(random_text.length < length) {
+                        random_text += m.codeletters.charAt(Math.floor(Math.random()*m.codeletters.length));
+                    }
+    
+                    return random_text;
+                };
+    
+                m.animateIn = function(){
+                    m.current_length = m.messages[index].length;
+                        
+                    var message = m.generateRandomString(m.current_length);
+                    $(el).html(message);
+                        
+                    setTimeout(m.animateFadeBuffer, 100);
+                };
+    
+                m.animateFadeBuffer = function(){
+                    if(m.fadeBuffer === false){
+                        m.fadeBuffer = [];
+                        for(var i = 0; i < m.messages[index].length; i++){
+                            m.fadeBuffer.push({c: (Math.floor(Math.random()*30))+1, l: m.messages[index].charAt(i)});
+                        }
+                    }
+    
+                    var do_cycles = false;
+                    var message = ''; 
+    
+                    for(var i = 0; i < m.fadeBuffer.length; i++){
+                        var fader = m.fadeBuffer[i];
+                        if(fader.c > 0){
+                            do_cycles = true;
+                            fader.c--;
+                            message += m.codeletters.charAt(Math.floor(Math.random()*m.codeletters.length));
+                        } 
+                        else {
+                            message += fader.l;
+                        }
+                    }
+    
+                    $(el).html(message);
+    
+                    if(do_cycles === true){
+                        setTimeout(m.animateFadeBuffer, 50);
+                    } 
+                };
+    
+                m.init();
+            }
+    
+            var messenger = new Messenger($('#messenger'),0);
+            var messenger2 = new Messenger($('#senda1'),1);
+            var messenger3 = new Messenger($('#senda2'),2);
+            var messenger4 = new Messenger($('#senda3'),3);
+            var messenger5 = new Messenger($('#senda4'),4);
+            var messenger6 = new Messenger($('#senda5'),5);
+    
+        </script>
+    
+        <div class="about" id="about">
+            <p>Welcome to my site!</p>
+            <ul>
+                <li>I'm a Computer Engineering student at <a rel="noreferrer" href="https://uwaterloo.ca/" target="_blank">Waterloo</a></li>
+                <li>I was formerly a Software Developer Intern at <a rel="noreferrer" href="https://www.canadiansolar.com" target="_blank">Canadian Solar 🌤</a></li>
+                <li>Occasionally build mechanical keyboards, and go for swims at the pool 🏊‍♀️</li>
+                <li> </li>
+            </ul>
+            Talk to me about anything!
+        </div>
+    
+        <div class="links" id="links">
+            <a rel="noreferrer" href="https://github.com/jessicayuan1" target="_blank">GitHub</a>
+            <a rel="noreferrer" href="https://www.linkedin.com/in/jessica-yuan1" target="_blank">LinkedIn</a>
+            <!-- <a rel="noreferrer" href="ADD A LINK HERE " target="_blank">Resume</a> -->
+            <!-- <a>Projects</a> -->
+            <!-- INSERT EMAIL HERE  -->
+        </div>
+    
+
+        <div class="credentials" id="credentials">
+            © 2023 Jessica Yuan
+        </div>
+
+    </div>
+
+</body>
+</html>
