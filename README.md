@@ -1,4 +1,4 @@
 # jessicayuan1.github.io
 
 ###
-Built using HTML and CSS.
+Built using JavaScript, HTML and CSS.
